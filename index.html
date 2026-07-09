@@ -4,20 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Battery Information · EU 2023/1542</title>
-<!-- QR Code 库 -->
+<!-- QR Code Library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode.js/1.5.0/qrcode.min.js"></script>
 <style>
   /* ============================================================
-     EU 2023/1542 Battery QR Landing Page — TEMPLATE
-     -----------------------------------------------------------
-     使用说明 / HOW TO USE:
-     1. 搜索所有 【...】 占位符,替换为你的产品数据。
-        Search every 【...】 placeholder and replace with your data.
-     2. Cd/Pb 行:仅当镉>0.002% 或铅>0.004% 时显示,否则删除该行。
-        Cd/Pb row: keep ONLY if Cd>0.002% or Pb>0.004%; else delete.
-     3. 页面已内置中/英切换,如需其它语言复制 data-en/data-zh 模式。
-        Built-in EN/ZH toggle; duplicate the pattern for more languages.
-     4. 建议将本页托管于稳定 URL,并保存版本快照作为合规证据。
+     EU 2023/1542 Battery QR Landing Page — ENGLISH ONLY
      ============================================================ */
 
   :root{
@@ -27,13 +18,13 @@
     --line-soft:#eef1f3;
     --paper:#ffffff;
     --panel:#f7f9fa;
-    --accent:#0b6b5f;          /* 深青绿:环保/循环经济语义,区别于常见 AI 默认色 */
+    --accent:#0b6b5f;
     --accent-soft:#e6f2f0;
     --warn:#8a5a00;
     --warn-soft:#fbf3e2;
     --radius:14px;
     --mono:"SFMono-Regular",ui-monospace,"Cascadia Code","Roboto Mono",Menlo,Consolas,monospace;
-    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+    --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   }
 
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -75,30 +66,6 @@
     letter-spacing:.02em;
   }
   .brand span{color:var(--accent);}
-  .langs{
-    display:flex;
-    gap:2px;
-    background:var(--line-soft);
-    border-radius:999px;
-    padding:3px;
-  }
-  .langs button{
-    border:0;
-    background:transparent;
-    font:inherit;
-    font-size:12px;
-    font-weight:600;
-    color:var(--ink-soft);
-    padding:5px 12px;
-    border-radius:999px;
-    cursor:pointer;
-    transition:all .15s;
-  }
-  .langs button.active{
-    background:var(--paper);
-    color:var(--ink);
-    box-shadow:0 1px 2px rgba(0,0,0,.08);
-  }
   h1{
     font-size:23px;
     font-weight:700;
@@ -215,60 +182,6 @@
     white-space:nowrap;
   }
 
-  /* ---------- QR code section ---------- */
-  .qr-section{
-    display:none;
-    position:fixed;
-    top:0;
-    right:0;
-    width:300px;
-    background:var(--paper);
-    border-left:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    padding:20px;
-    border-radius:0 0 0 var(--radius);
-    box-shadow:0 2px 12px rgba(0,0,0,.1);
-    z-index:999;
-  }
-  .qr-section.active{display:flex;flex-direction:column;align-items:center;gap:12px;}
-  .qr-title{
-    font-size:13px;
-    font-weight:600;
-    color:var(--ink);
-    text-align:center;
-  }
-  .qr-code{
-    background:white;
-    padding:12px;
-    border:1px solid var(--line);
-    border-radius:8px;
-  }
-  .qr-url{
-    font-size:10px;
-    color:var(--ink-soft);
-    text-align:center;
-    word-break:break-all;
-    font-family:var(--mono);
-    line-height:1.3;
-  }
-  .qr-btn{
-    display:flex;
-    gap:6px;
-    font-size:11px;
-    background:var(--accent);
-    color:white;
-    border:0;
-    padding:6px 12px;
-    border-radius:6px;
-    cursor:pointer;
-    font-weight:600;
-    transition:all .15s;
-  }
-  .qr-btn:hover{
-    background:#095650;
-    box-shadow:0 2px 6px rgba(0,0,0,.15);
-  }
-
   /* ---------- collection symbol block ---------- */
   .collect{
     display:flex;
@@ -287,43 +200,56 @@
     display:flex;
     gap:10px;
     background:var(--warn-soft);
-    border-radius:10px;
-    padding:13px 15px;
-    font-size:12.5px;
+    border-left:3px solid var(--warn);
+    padding:12px 14px;
+    border-radius:8px;
+    font-size:12px;
     color:var(--warn);
-    line-height:1.5;
+    margin-top:12px;
   }
   .note svg{flex-shrink:0;margin-top:1px;}
 
-  /* ---------- docs / links ---------- */
-  .doclist{display:flex;flex-direction:column;gap:8px;}
+  /* ---------- document list ---------- */
+  .doclist{display:flex;flex-direction:column;gap:10px;}
   .doc{
     display:flex;
+    gap:12px;
     align-items:center;
-    gap:11px;
-    padding:12px 14px;
+    padding:13px 14px;
+    background:var(--panel);
     border:1px solid var(--line);
     border-radius:10px;
     text-decoration:none;
-    color:var(--ink);
-    transition:border-color .15s,background .15s;
+    color:inherit;
+    transition:all .15s;
   }
-  .doc:hover{border-color:var(--accent);background:var(--accent-soft);}
-  .doc-icon{
-    width:34px;height:34px;flex-shrink:0;
-    background:var(--panel);
-    border-radius:8px;
-    display:flex;align-items:center;justify-content:center;
+  .doc:hover{
+    background:var(--line-soft);
+    border-color:var(--accent);
   }
-  .doc-main{flex:1;min-width:0;}
-  .doc-title{font-size:13.5px;font-weight:600;}
-  .doc-sub{font-size:11px;color:var(--ink-soft);}
-  .doc-arrow{color:var(--ink-soft);flex-shrink:0;}
+  .doc-icon{flex-shrink:0;}
+  .doc-main{flex:1;}
+  .doc-title{
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:2px;
+  }
+  .doc-sub{
+    font-size:11px;
+    color:var(--ink-soft);
+    font-family:var(--mono);
+  }
+  .doc-arrow{
+    flex-shrink:0;
+    color:var(--ink-soft);
+    opacity:0.5;
+  }
 
   /* ---------- footer ---------- */
   footer{
-    padding:18px 24px 22px;
+    padding:16px 24px;
     background:var(--panel);
+    border-top:1px solid var(--line);
     font-size:11px;
     color:var(--ink-soft);
     line-height:1.6;
@@ -331,79 +257,44 @@
   .foot-meta{
     display:flex;
     flex-wrap:wrap;
-    gap:6px 18px;
-    margin-bottom:10px;
-    font-family:var(--mono);
-    font-size:10.5px;
+    gap:16px;
+    margin-bottom:12px;
+    padding-bottom:12px;
+    border-bottom:1px solid var(--line);
   }
-  .foot-meta span b{color:var(--ink);font-weight:600;}
-  .foot-legal{border-top:1px solid var(--line);padding-top:10px;}
-  .foot-legal a{color:var(--accent);}
-
-  /* ---------- language visibility ---------- */
-  [data-zh]{display:none;}
-  html[lang="zh"] [data-en]{display:none;}
-  html[lang="zh"] [data-zh]{display:inline;}
-  html[lang="zh"] .row-key [data-zh],
-  html[lang="zh"] .collect-text [data-zh]{display:inline;}
-  /* block-level bilingual containers */
-  html[lang="zh"] [data-zh].blk{display:block;}
-
-  @media (max-width:480px){
-    body{padding:12px 8px 40px;}
-    .identity{grid-template-columns:1fr;}
-    .row-val{max-width:52%;font-size:13.5px;}
-    h1{font-size:20px;}
-  }
-
-  /* ---------- print (合规存档) ---------- */
-  @media print{
-    body{background:#fff;padding:0;}
-    .sheet{border:0;max-width:100%;}
-    .langs{display:none;}
-    .doc:hover{background:none;}
-    section,.head,.identity,footer{page-break-inside:avoid;}
-  }
+  .foot-meta span{display:flex;align-items:center;gap:6px;}
+  .foot-legal{line-height:1.5;}
+  .foot-legal a{color:var(--accent);text-decoration:none;}
+  .foot-legal a:hover{text-decoration:underline;}
 </style>
 </head>
 <body>
+
 <div class="sheet">
 
   <!-- ============ HEADER ============ -->
   <div class="head">
     <div class="head-top">
-      <div class="brand"><span data-en>【BRAND NAME】</span><span data-zh>【品牌名称】</span></div>
-      <div class="langs">
-        <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
-        <button id="btn-zh" onclick="setLang('zh')">中文</button>
-      </div>
+      <div class="brand"><span>⚡</span>Battery Info</div>
     </div>
-    <h1>
-      <span data-en>Battery Information</span>
-      <span data-zh class="blk">电池信息</span>
-    </h1>
-    <p class="subtitle">
-      <span data-en>Regulatory information for the battery in this product.</span>
-      <span data-zh class="blk">本产品电池的法规信息。</span>
-    </p>
-    <div class="reg-chip">Regulation (EU) 2023/1542 · Art.13 · Annex VI</div>
+    <h1>Battery Information</h1>
+    <div class="subtitle">Regulatory information for the battery in this product.</div>
+    <div class="reg-chip">Regulation (EU) 2023/1542</div>
   </div>
 
-  <!-- ============ IDENTITY STRIP ============ -->
+  <!-- ============ IDENTITY ============ -->
   <div class="identity">
-    <div class="full">
-      <div class="id-label"><span data-en>Model / Type</span><span data-zh>型号 / 类型</span></div>
-      <div class="id-value"><span class="ph">【MODEL / 型号】</span></div>
+    <div>
+      <div class="id-label">Model / Type</div>
+      <div class="id-value"><span class="ph">【MODEL / TYPE】</span></div>
     </div>
     <div>
-      <div class="id-label"><span data-en>Batch / Serial No.</span><span data-zh>批次 / 序列号</span></div>
+      <div class="id-label">Batch / Serial No.</div>
       <div class="id-value"><span class="ph">【BATCH / SN】</span></div>
     </div>
     <div>
-      <div class="id-label"><span data-en>Battery Category</span><span data-zh>电池类别</span></div>
-      <div class="id-value">
-        <span data-en>Portable</span><span data-zh>便携式</span>
-      </div>
+      <div class="id-label">Battery Category</div>
+      <div class="id-value">Portable</div>
     </div>
   </div>
 
@@ -411,47 +302,47 @@
   <section>
     <div class="sec-head">
       <span class="sec-num">01</span>
-      <span class="sec-title"><span data-en>General Information</span><span data-zh>一般信息</span></span>
+      <span class="sec-title">General Information</span>
     </div>
     <div class="rows">
       <div class="row">
         <div class="row-key">
-          <span data-en>Manufacturer</span><span data-zh>制造商</span>
+          Manufacturer
           <span class="row-ref">Art.13(1) · Annex VI Part A</span>
         </div>
-        <div class="row-val"><span class="ph">【MANUFACTURER NAME / 制造商名称】</span></div>
+        <div class="row-val"><span class="ph">【MANUFACTURER NAME】</span></div>
       </div>
       <div class="row">
         <div class="row-key">
-          <span data-en>Contact address</span><span data-zh>联系地址</span>
+          Contact address
           <span class="row-ref">Art.38(7)</span>
         </div>
         <div class="row-val"><span class="ph">【ADDRESS · WEB · EMAIL】</span></div>
       </div>
       <div class="row">
         <div class="row-key">
-          <span data-en>Place of manufacture</span><span data-zh>生产地点</span>
+          Place of manufacture
           <span class="row-ref">Annex VI Part A</span>
         </div>
-        <div class="row-val"><span class="ph">【PLACE / 地点】</span></div>
+        <div class="row-val"><span class="ph">【PLACE】</span></div>
       </div>
       <div class="row">
         <div class="row-key">
-          <span data-en>Date of manufacture</span><span data-zh>生产日期</span>
+          Date of manufacture
           <span class="row-ref">Annex VI Part A</span>
         </div>
         <div class="row-val"><span class="ph">【MM/YYYY】</span></div>
       </div>
       <div class="row">
         <div class="row-key">
-          <span data-en>Weight</span><span data-zh>重量</span>
+          Weight
           <span class="row-ref">Annex VI Part A</span>
         </div>
         <div class="row-val"><span class="ph">【__ g】</span></div>
       </div>
       <div class="row">
         <div class="row-key">
-          <span data-en>Battery chemistry</span><span data-zh>化学体系</span>
+          Battery chemistry
           <span class="row-ref">Annex VI Part A</span>
         </div>
         <div class="row-val"><span class="ph">【NiMH / …】</span></div>
@@ -463,39 +354,34 @@
   <section>
     <div class="sec-head">
       <span class="sec-num">02</span>
-      <span class="sec-title"><span data-en>Performance &amp; Capacity</span><span data-zh>性能与容量</span></span>
+      <span class="sec-title">Performance &amp; Capacity</span>
     </div>
     <div class="rows">
       <div class="row">
         <div class="row-key">
-          <span data-en>Rated capacity</span><span data-zh>额定容量</span>
+          Rated capacity
           <span class="row-ref">Art.13(2) · Annex IV</span>
         </div>
         <div class="row-val"><span class="ph">【__ mAh】</span></div>
       </div>
       <div class="row">
         <div class="row-key">
-          <span data-en>Nominal voltage</span><span data-zh>标称电压</span>
+          Nominal voltage
           <span class="row-ref">Annex VI Part A</span>
         </div>
         <div class="row-val"><span class="ph">【__ V】</span></div>
       </div>
       <div class="row">
         <div class="row-key">
-          <span data-en>Minimum average duration</span><span data-zh>最低平均使用时长</span>
+          Minimum average duration
           <span class="row-ref">Art.13(3)</span>
         </div>
-        <div class="row-val">
-          <span class="ph">【__ / N/A】</span>
-        </div>
+        <div class="row-val"><span class="ph">【__ / N/A】</span></div>
       </div>
     </div>
     <div style="margin-top:12px" class="note">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-      <span>
-        <span data-en>"Minimum average duration" applies to non-rechargeable portable batteries only. For rechargeable cells, mark N/A.</span>
-        <span data-zh>"最低平均使用时长"仅适用于非充电便携电池;可充电电池填 N/A。</span>
-      </span>
+      <span>"Minimum average duration" applies to non-rechargeable portable batteries only. For rechargeable cells, mark N/A.</span>
     </div>
   </section>
 
@@ -503,38 +389,34 @@
   <section>
     <div class="sec-head">
       <span class="sec-num">03</span>
-      <span class="sec-title"><span data-en>Substances</span><span data-zh>物质信息</span></span>
+      <span class="sec-title">Substances</span>
     </div>
     <div class="rows">
       <div class="row">
         <div class="row-key">
-          <span data-en>Hazardous substances (other than Hg/Cd/Pb)</span><span data-zh>有害物质(汞/镉/铅以外)</span>
+          Hazardous substances (other than Hg/Cd/Pb)
           <span class="row-ref">Annex VI Part C</span>
         </div>
-        <div class="row-val"><span class="ph">【NONE / 名称】</span></div>
+        <div class="row-val"><span class="ph">【NONE / NAME】</span></div>
       </div>
       <div class="row">
         <div class="row-key">
-          <span data-en>Critical raw materials &gt;0.1% w/w</span><span data-zh>关键原材料 &gt;0.1% 重量比</span>
+          Critical raw materials &gt;0.1% w/w
           <span class="row-ref">Annex VI Part C</span>
         </div>
-        <div class="row-val"><span class="ph">【NONE / 列出】</span></div>
+        <div class="row-val"><span class="ph">【NONE / LIST】</span></div>
       </div>
-      <!-- ↓↓ Cd/Pb 行:仅当镉>0.002% 或铅>0.004% 时保留,否则整行删除 ↓↓ -->
       <div class="row">
         <div class="row-key">
-          <span data-en>Heavy-metal marking</span><span data-zh>重金属标识</span>
-          <span class="row-ref">Art.13(5) — conditional / 有条件</span>
+          Heavy-metal marking
+          <span class="row-ref">Art.13(5) — conditional</span>
         </div>
         <div class="row-val"><span class="ph">【Cd / Pb / — 】</span></div>
       </div>
     </div>
     <div style="margin-top:12px" class="note">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-      <span>
-        <span data-en>Cd/Pb marking is required only if cadmium &gt;0.002% or lead &gt;0.004%. NiMH usually does not trigger it — confirm via supplier declaration, then delete this row if not applicable.</span>
-        <span data-zh>仅当镉&gt;0.002% 或铅&gt;0.004% 时才需 Cd/Pb 标识。NiMH 通常不触发——须以供应商声明确认;不适用时删除本行。</span>
-      </span>
+      <span>Cd/Pb marking is required only if cadmium &gt;0.002% or lead &gt;0.004%. NiMH usually does not trigger it — confirm via supplier declaration, then delete this row if not applicable.</span>
     </div>
   </section>
 
@@ -542,7 +424,7 @@
   <section>
     <div class="sec-head">
       <span class="sec-num">04</span>
-      <span class="sec-title"><span data-en>End of Life</span><span data-zh>废弃处理</span></span>
+      <span class="sec-title">End of Life</span>
     </div>
     <div class="collect">
       <div class="bin">
@@ -555,9 +437,8 @@
         </svg>
       </div>
       <div class="collect-text">
-        <b><span data-en>Do not discard with household waste</span><span data-zh>请勿随生活垃圾丢弃</span></b>
-        <span data-en>This battery must be collected separately and recycled. Return it to a designated collection point.</span>
-        <span data-zh>本电池须分类收集并回收,请交至指定回收点。</span>
+        <b>Do not discard with household waste</b>
+        This battery must be collected separately and recycled. Return it to a designated collection point.
       </div>
     </div>
   </section>
@@ -566,35 +447,35 @@
   <section>
     <div class="sec-head">
       <span class="sec-num">05</span>
-      <span class="sec-title"><span data-en>Documents</span><span data-zh>相关文件</span></span>
+      <span class="sec-title">Documents</span>
     </div>
     <div class="doclist">
-      <a class="doc" href="【DOC-URL / 文件链接】">
+      <a class="doc" href="【DOC-URL】">
         <span class="doc-icon">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
         </span>
         <div class="doc-main">
-          <div class="doc-title"><span data-en>EU Declaration of Conformity</span><span data-zh>欧盟符合性声明 (DoC)</span></div>
+          <div class="doc-title">EU Declaration of Conformity</div>
           <div class="doc-sub">Art.18 · Annex IX</div>
         </div>
         <span class="doc-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
       </a>
-      <a class="doc" href="【DOC-URL / 文件链接】">
+      <a class="doc" href="【DOC-URL】">
         <span class="doc-icon">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M12 20h9M3 20l1.5-4L15 5.5a2.1 2.1 0 0 1 3 3L7.5 19 3 20z"/></svg>
         </span>
         <div class="doc-main">
-          <div class="doc-title"><span data-en>Safety &amp; handling instructions</span><span data-zh>安全与使用说明</span></div>
+          <div class="doc-title">Safety &amp; handling instructions</div>
           <div class="doc-sub">Art.12</div>
         </div>
         <span class="doc-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
       </a>
-      <a class="doc" href="【REPLACE-URL / 更换说明链接】">
+      <a class="doc" href="【REPLACE-URL】">
         <span class="doc-icon">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/></svg>
         </span>
         <div class="doc-main">
-          <div class="doc-title"><span data-en>Removal &amp; replacement guide</span><span data-zh>拆卸与更换指南</span></div>
+          <div class="doc-title">Removal &amp; replacement guide</div>
           <div class="doc-sub">Art.11 · from 18 Feb 2027</div>
         </div>
         <span class="doc-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
@@ -606,77 +487,41 @@
   <footer>
     <div class="foot-meta">
       <span><b>CE</b> ✓</span>
-      <span data-en>Info version: <b>【v1.0】</b></span>
-      <span data-zh>信息版本:<b>【v1.0】</b></span>
-      <span data-en>Last updated: <b>【YYYY-MM-DD】</b></span>
-      <span data-zh>最后更新:<b>【YYYY-MM-DD】</b></span>
+      <span>Info version: <b>【v1.0】</b></span>
+      <span>Last updated: <b>【YYYY-MM-DD】</b></span>
     </div>
     <div class="foot-legal">
-      <span data-en>This information is provided under Regulation (EU) 2023/1542, Article 13(6) and Annex VI, and is kept complete, up-to-date and accurate. Official text: </span>
-      <span data-zh>本信息依据 Regulation (EU) 2023/1542 第 13(6) 条及附件 VI 提供,并保持完整、最新、准确。法规原文:</span>
-      <a href="https://eur-lex.europa.eu/eli/reg/2023/1542/oj/eng">EUR-Lex</a>
+      This information is provided under Regulation (EU) 2023/1542, Article 13(6) and Annex VI, and is kept complete, up-to-date and accurate. Official text: <a href="https://eur-lex.europa.eu/eli/reg/2023/1542/oj/eng">EUR-Lex</a>
     </div>
   </footer>
 
 </div>
 
-  <!-- QR Code Panel -->
-  <div class="qr-section" id="qr-panel">
-    <div class="qr-title">
-      <span data-en>Scan QR Code</span>
-      <span data-zh>扫描二维码</span>
-    </div>
-    <div class="qr-code" id="qrcode-container"></div>
-    <div class="qr-url" id="qr-url-display"></div>
-    <button class="qr-btn" onclick="downloadQR()">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      <span data-en>Download</span>
-      <span data-zh>下载</span>
-    </button>
-  </div>
-
 <script>
-  function setLang(l){
-    document.documentElement.lang = l;
-    document.getElementById('btn-en').classList.toggle('active', l==='en');
-    document.getElementById('btn-zh').classList.toggle('active', l==='zh');
-  }
-
-  // QR Code 生成函数
+  // QR Code generation function
   function initQR(){
     const currentUrl = window.location.href;
-    document.getElementById('qr-url-display').textContent = currentUrl;
     
-    // 清空之前的二维码
-    document.getElementById('qrcode-container').innerHTML = '';
-    
-    // 生成新的二维码
-    new QRCode(document.getElementById('qrcode-container'), {
-      text: currentUrl,
-      width: 200,
-      height: 200,
-      colorDark: '#14181d',
-      colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.H
-    });
-    
-    // 显示 QR 面板
-    document.getElementById('qr-panel').classList.add('active');
-  }
-
-  // 下载 QR 码
-  function downloadQR(){
-    const canvas = document.querySelector('#qrcode-container canvas');
-    if(canvas){
-      const link = document.createElement('a');
-      link.href = canvas.toDataURL('image/png');
-      link.download = 'battery-info-qr.png';
-      link.click();
+    // Clear previous QR code
+    const container = document.getElementById('qrcode-container');
+    if(container){
+      container.innerHTML = '';
+      
+      // Generate new QR code
+      new QRCode(container, {
+        text: currentUrl,
+        width: 200,
+        height: 200,
+        colorDark: '#14181d',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+      });
     }
   }
 
-  // 页面加载时生成 QR 码
+  // Load QR code when page loads
   window.addEventListener('load', initQR);
 </script>
+
 </body>
 </html>
